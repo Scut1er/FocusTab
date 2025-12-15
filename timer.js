@@ -1,9 +1,9 @@
 // Управление таймером Pomodoro
 class PomodoroTimer {
     constructor() {
-        this.workDuration = 0.1 * 60; // 25 минут в секундах
-        this.shortBreakDuration = 0.1 * 60; // 5 минут в секундах
-        this.longBreakDuration =  0.1 * 60; // 15 минут в секундах
+        this.workDuration = 25 * 60; // 25 минут в секундах
+        this.shortBreakDuration = 5 * 60; // 5 минут в секундах
+        this.longBreakDuration =  15 * 60; // 15 минут в секундах
         this.currentTime = this.workDuration;
         this.isRunning = false;
         this.isPaused = false;
