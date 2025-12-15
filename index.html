@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FocusTab - минималистичное веб-приложение для повышения продуктивности с таймером Pomodoro, списком задач и мотивационными цитатами">
+    <title>FocusTab - Таймер Pomodoro</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css?v=6">
+    <meta name="theme-color" content="#4a90e2">
+    <link rel="icon" href="icon-192.svg" type="image/svg+xml">
+</head>
+<body>
+    <!-- Кнопки управления -->
+    <button id="settingsBtn" class="settings-btn" aria-label="Настройки" title="Настройки">⚙️</button>
+    <button id="statsBtn" class="stats-btn" aria-label="Статистика" title="Статистика">📊</button>
+
+    <div class="container">
+        <!-- Таймер Pomodoro -->
+        <section class="timer-section">
+            <div class="timer-container">
+                <div class="timer-display" id="timerDisplay">25:00</div>
+                <div class="timer-status" id="timerStatus">Готов к запуску</div>
+                <div class="timer-controls">
+                    <button id="startBtn" class="btn btn-primary">Старт</button>
+                    <button id="pauseBtn" class="btn btn-secondary" style="display: none;">Пауза</button>
+                    <button id="resetBtn" class="btn btn-secondary">Сброс</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Список задач -->
+        <section class="tasks-section">
+            <h2>Задачи</h2>
+            <div class="task-input-container">
+                <input 
+                    type="text" 
+                    id="taskInput" 
+                    class="task-input" 
+                    placeholder="Добавить новую задачу"
+                    maxlength="500"
+                >
+                <button id="addTaskBtn" class="btn-icon" aria-label="Добавить задачу">+</button>
+            </div>
+            <ul class="tasks-list" id="tasksList"></ul>
+        </section>
+
+        <!-- Мотивационные цитаты -->
+        <section class="quotes-section">
+            <h2>Мотивация</h2>
+            <div class="quote-container">
+                <p class="quote-text" id="quoteText"></p>
+                <button id="newQuoteBtn" class="btn btn-link">Новая цитата</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Уведомление -->
+    <div id="notification" class="notification" style="display: none;"></div>
+
+    <!-- Модальное окно настроек -->
+    <div id="settingsModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Настройки</h2>
+                <button class="modal-close" id="closeSettingsBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <label>Звук уведомления:</label>
+                    <p class="setting-hint">Используется файл notification.mp3</p>
+                    <div style="display: flex; gap: 10px; align-items: center; margin-top: 10px;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="soundEnabled" checked>
+                            <span>Включить звук</span>
+                        </label>
+                        <button id="testSoundBtn" class="btn btn-secondary">Тест звука</button>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <label>
+                        <input type="checkbox" id="notificationsEnabled">
+                        Разрешить браузерные уведомления
+                    </label>
+                    <button id="requestNotificationBtn" class="btn btn-primary" style="margin-top: 10px; display: none;">
+                        Запросить разрешение
+                    </button>
+                    <p class="setting-hint" id="notificationStatus"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно статистики -->
+    <div id="statsModal" class="modal" style="display: none;">
+        <div class="modal-content modal-stats">
+            <div class="modal-header">
+                <h2>Статистика Pomodoro</h2>
+                <button class="modal-close" id="closeStatsBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="stats-filters">
+                    <div class="filter-group">
+                        <label for="startDate">С:</label>
+                        <input type="date" id="startDate" class="date-input">
+                    </div>
+                    <div class="filter-group">
+                        <label for="endDate">По:</label>
+                        <input type="date" id="endDate" class="date-input">
+                    </div>
+                    <button id="applyFiltersBtn" class="btn btn-primary">Применить</button>
+                </div>
+                <div class="stats-summary" id="statsSummary"></div>
+                <div class="stats-table-container">
+                    <table class="stats-table" id="statsTable">
+                        <thead>
+                            <tr>
+                                <th>Дата</th>
+                                <th>Pomodoro</th>
+                                <th>Время работы</th>
+                            </tr>
+                        </thead>
+                        <tbody id="statsTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="stats-empty" id="statsEmpty" style="display: none;">
+                    <p>Нет данных за выбранный период</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="quotes.js"></script>
+    <script src="storage.js"></script>
+    <script src="sounds.js"></script>
+    <script src="timer.js"></script>
+    <script src="tasks.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
