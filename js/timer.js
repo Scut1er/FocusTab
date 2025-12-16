@@ -1,9 +1,9 @@
 // Управление таймером Pomodoro
 class PomodoroTimer {
     constructor() {
-        this.workDuration = 25 * 60; // 25 минут в секундах
-        this.shortBreakDuration = 5 * 60; // 5 минут в секундах
-        this.longBreakDuration =  15 * 60; // 15 минут в секундах
+        this.workDuration = 0.1 * 60; // 25 минут в секундах
+        this.shortBreakDuration = 0.1 * 60; // 5 минут в секундах
+        this.longBreakDuration =  0.1 * 60; // 15 минут в секундах
         this.currentTime = this.workDuration;
         this.isRunning = false;
         this.isPaused = false;
@@ -75,18 +75,18 @@ class PomodoroTimer {
             this.intervalId = null;
         }
 
-        // Воспроизведение звука и показ уведомления
-        if (soundManager) {
-            soundManager.playSound();
-        }
-        
-        // Показ браузерного уведомления
-        showBrowserNotification();
-        
         if (this.currentMode === 'work') {
             this.completedPomodoros++;
             incrementPomodoroCount();
+            
+            // Воспроизведение звука для рабочего интервала
+            if (soundManager) {
+                soundManager.playSound('work');
+            }
+            
+            // Показ уведомления о завершении рабочего интервала
             showNotification('Рабочий интервал завершен! Время для отдыха.', 'success');
+            showBrowserNotification();
             
             // Автоматический переход на перерыв
             if (this.completedPomodoros % 4 === 0) {
@@ -98,7 +98,15 @@ class PomodoroTimer {
                 this.currentTime = this.shortBreakDuration;
             }
         } else {
+            // Воспроизведение звука для перерыва
+            if (soundManager) {
+                soundManager.playSound('break');
+            }
+            
+            // Показ уведомления о завершении перерыва
             showNotification('Перерыв завершен! Время работать.', 'info');
+            showBrowserNotification();
+            
             this.currentMode = 'work';
             this.currentTime = this.workDuration;
         }

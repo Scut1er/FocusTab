@@ -132,8 +132,8 @@ function setupEventListeners() {
     if (testSoundBtn) {
         testSoundBtn.addEventListener('click', () => {
             if (soundManager) {
-                // Принудительно воспроизводим звук для теста
-                soundManager.playSound(true);
+                // Принудительно воспроизводим звук для теста (рабочий интервал)
+                soundManager.playSound('work', true);
             }
         });
     }
@@ -522,9 +522,10 @@ function showBrowserNotification() {
         let title = '';
         let body = '';
         
+        // Определяем тип интервала по текущему состоянию таймера
         if (appTimer && appTimer.currentMode === 'work') {
             title = 'Рабочий интервал завершен!';
-            body = 'Время для отдыха. Хорошая работа!';
+            body = 'Время для отдыха.';
         } else {
             title = 'Перерыв завершен!';
             body = 'Время возвращаться к работе.';
@@ -533,8 +534,8 @@ function showBrowserNotification() {
         try {
             const notification = new Notification(title, {
                 body: body,
-                icon: './icon-192.svg',
-                badge: './icon-192.svg',
+                icon: './assets/icon-192.svg',
+                badge: './assets/icon-192.svg',
                 tag: 'pomodoro-timer',
                 requireInteraction: false
             });
