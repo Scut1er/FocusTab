@@ -36,5 +36,54 @@ FocusTab — это минималистичное веб-приложение, 
 
 ## 🛠️ Технологии
 - HTML / CSS / JavaScript  
-- LocalStorage  
-- Python FastAPI Backend
+- Service Workers (PWA)
+- Web Audio API
+- Notifications API
+- localStorage
+
+## 📁 Структура проекта
+
+```
+FocusTab/
+├── index.html              # Главная страница приложения
+├── styles.css              # Стили приложения
+├── manifest.json           # Манифест PWA
+├── service-worker.js       # Service Worker для оффлайн работы
+├── js/                     # JavaScript модули
+│   ├── app.js              # Главный файл приложения
+│   ├── timer.js            # Логика таймера Pomodoro
+│   ├── tasks.js            # Управление списком задач
+│   ├── storage.js          # Работа с localStorage
+│   ├── quotes.js           # База мотивационных цитат
+│   └── sounds.js           # Управление звуковыми уведомлениями
+├── assets/                 # Ресурсы приложения
+│   ├── notification.mp3    # Звук для завершения рабочего интервала
+│   ├── notification2.mp3   # Звук для завершения перерыва
+│   ├── icon-192.svg        # Иконка PWA 192x192
+│   └── icon-512.svg        # Иконка PWA 512x512
+├── HOWTO.md                # Подробная документация
+└── README.md               # Этот файл
+```
+
+## Установка и запуск
+
+1. Клонируйте репозиторий:
+```bash
+git clone https://github.com/Scut1er/FocusTab.git
+cd FocusTab
+```
+
+2. Откройте `index.html` в браузере или используйте локальный сервер:
+
+```bash
+# Python 3
+python -m http.server 8000
+
+# Node.js (http-server)
+npx http-server
+
+# PHP
+php -S localhost:8000
+```
+
+3. Откройте браузер и перейдите на `http://localhost:8000`
