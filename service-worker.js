@@ -1,17 +1,20 @@
 // Service Worker для PWA
-const CACHE_NAME = 'focustab-v4';
+const CACHE_NAME = 'focustab-v6';
 const urlsToCache = [
     './',
     './index.html',
     './styles.css',
-    './app.js',
-    './timer.js',
-    './tasks.js',
-    './storage.js',
-    './quotes.js',
-    './sounds.js',
+    './js/app.js',
+    './js/timer.js',
+    './js/tasks.js',
+    './js/storage.js',
+    './js/quotes.js',
+    './js/sounds.js',
     './manifest.json',
-    './notification.mp3'
+    './assets/notification.mp3',
+    './assets/notification2.mp3',
+    './assets/icon-192.svg',
+    './assets/icon-512.svg'
 ];
 
 // Установка Service Worker
